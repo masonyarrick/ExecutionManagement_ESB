@@ -94,6 +94,25 @@
     }
   },
   "definitions" : {
+    "workCommencedMessage" : {
+      "type" : "object",
+      "description" : "The work commenced event is raised by the execution management activity to notify when work masters, resource relationship networks, workflow specifications, resource instances and definitions (material, equipment, and personnel, test specifications, work alerts, and work records are defined.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
+      "properties" : {
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
+        }
+      }
+    },
     "InventoryItem" : {
       "type" : "object",
       "required" : [ "id", "name", "manufacturer", "releaseDate" ],
