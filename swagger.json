@@ -110,6 +110,54 @@
               }
             }
           }
+        },
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
+        },
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
         }
       }
     },
