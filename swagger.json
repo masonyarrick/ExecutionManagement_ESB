@@ -1,8 +1,8 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "In the DM App Service, the DM ESB (Contract) API uses the defined operations event message, workDefined, to notify subscribing L2-L4 app services or applications when an instance of the following objects are defined: work masters, resource relationship networks, workflow specifications, resource instances and definitions (material, equipment, and personnel, test specifications, work alerts, and work records.  The DM function services production and support operations by managing all Level 3 and some Level 2 information definition. The primary work definition object is the work master which is the requirements for all work task in mining supply chain operations.  The work master contains the required bill of resources, the workflow specification for execution, and parameter specifications. The work master includes    1) Material specification object with material use for production operations as material produced, consumable, material consumed, by-product produced, co-product produced, and yield produced. The material specification is typically represents the manufacturing bill of materials (BoM).    2) Required equipment specifications and personnel specifications. The resource specifications define the applied resource definition or class objects.    3) Workflow specification object defines a workflow as a collection of nodes and connections with the rules for relationship and dependency. A node may reference a chilld work master for more detail. The workflow specification can reference a master recipe (ANSI/ISA-88.00.01 and IEC 61512-1 definitions), standard operating procedure (SOP), standard operating conditions (SOC), routing, or assembly steps based on the production strategy used.      4) parameter specification object defines the job order specific parameters and rule sets which instructs how L3 manufacturing operations and L2 process sequences how to execute production or supporting operations.     Each work master (ISA-95 Part 4) has a defined scope to an equipment heirachy level as either general, site, work cell, unit or lower.  The DM specifications are sent and applied by other Level 3 functions and Level 2 functions. DM Administration includes management of the distribution of DM specifications to systems across L2-L4. Some of the product production rule sets as equipment and process production rule sets may exist in Level 2 controllers and devices. When that is the case, exchanges of this L2 information shall be coordinated with production execution management and data collection management activities DM information is used by production execution management function to provide operational commands to L2 equipment controllers and devices; the operational commands provides as the workflow specification is executed per the job order.",
-    "version" : "1.0.0",
+    "description" : "PLACE HOLDER.  In the DM App Service, the DM ESB (Contract) API uses the defined operations event message, workDefined, to notify subscribing L2-L4 app services or applications when an instance of the following objects are defined: work masters, resource relationship networks, workflow specifications, resource instances and definitions (material, equipment, and personnel, test specifications, work alerts, and work records.  The DM function services production and support operations by managing all Level 3 and some Level 2 information definition. The primary work definition object is the work master which is the requirements for all work task in mining supply chain operations.  The work master contains the required bill of resources, the workflow specification for execution, and parameter specifications. The work master includes    1) Material specification object with material use for production operations as material produced, consumable, material consumed, by-product produced, co-product produced, and yield produced. The material specification is typically represents the manufacturing bill of materials (BoM).    2) Required equipment specifications and personnel specifications. The resource specifications define the applied resource definition or class objects.    3) Workflow specification object defines a workflow as a collection of nodes and connections with the rules for relationship and dependency. A node may reference a chilld work master for more detail. The workflow specification can reference a master recipe (ANSI/ISA-88.00.01 and IEC 61512-1 definitions), standard operating procedure (SOP), standard operating conditions (SOC), routing, or assembly steps based on the production strategy used.      4) parameter specification object defines the job order specific parameters and rule sets which instructs how L3 manufacturing operations and L2 process sequences how to execute production or supporting operations.     Each work master (ISA-95 Part 4) has a defined scope to an equipment heirachy level as either general, site, work cell, unit or lower.  The DM specifications are sent and applied by other Level 3 functions and Level 2 functions. DM Administration includes management of the distribution of DM specifications to systems across L2-L4. Some of the product production rule sets as equipment and process production rule sets may exist in Level 2 controllers and devices. When that is the case, exchanges of this L2 information shall be coordinated with production execution management and data collection management activities DM information is used by production execution management function to provide operational commands to L2 equipment controllers and devices; the operational commands provides as the workflow specification is executed per the job order.",
+    "version" : "1.1.1",
     "title" : "Execution Management ESB Contract API",
     "contact" : {
       "email" : "mason.yarrick@bhp.com"
@@ -19,84 +19,11 @@
     "name" : "developers",
     "description" : "Operations available to regular developers"
   } ],
-  "paths" : {
-    "/inventory" : {
-      "get" : {
-        "tags" : [ "developers" ],
-        "summary" : "searches inventory",
-        "operationId" : "searchInventory",
-        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "query",
-          "name" : "searchString",
-          "description" : "pass an optional search string for looking up inventory",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "in" : "query",
-          "name" : "skip",
-          "description" : "number of records to skip for pagination",
-          "type" : "integer",
-          "format" : "int32",
-          "minimum" : 0
-        }, {
-          "in" : "query",
-          "name" : "limit",
-          "description" : "maximum number of records to return",
-          "type" : "integer",
-          "format" : "int32",
-          "minimum" : 0,
-          "maximum" : 50
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "search results matching criteria",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/InventoryItem"
-              }
-            }
-          },
-          "400" : {
-            "description" : "bad input parameter"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "admins" ],
-        "summary" : "adds an inventory item",
-        "operationId" : "addInventory",
-        "description" : "Adds an item to the system",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "inventoryItem",
-          "description" : "Inventory item to add",
-          "schema" : {
-            "$ref" : "#/definitions/InventoryItem"
-          }
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "item created"
-          },
-          "400" : {
-            "description" : "invalid input, object invalid"
-          },
-          "409" : {
-            "description" : "an existing item already exists"
-          }
-        }
-      }
-    }
-  },
+  "paths" : { },
   "definitions" : {
-    "workCommencedMessage" : {
+    "workExecutedMessage" : {
       "type" : "object",
-      "description" : "The work commenced event is raised by the execution management activity to notify when work masters, resource relationship networks, workflow specifications, resource instances and definitions (material, equipment, and personnel, test specifications, work alerts, and work records are defined.",
+      "description" : "The operations event message of work executed provides the ability for Level 3 execution management activities to provide notification of the execution of work, respectively.",
       "required" : [ "jobResponses", "materialLots", "materialSublots" ],
       "properties" : {
         "jobResponses" : {
@@ -161,44 +88,1878 @@
         }
       }
     },
-    "InventoryItem" : {
+    "workReconciledMessage" : {
       "type" : "object",
-      "required" : [ "id", "name", "manufacturer", "releaseDate" ],
+      "description" : "The operations event message of work reconciled events provides the ability for any possible adjustments through job response and potentially material lot/sublot information.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
       "properties" : {
-        "id" : {
-          "type" : "string",
-          "format" : "uuid",
-          "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
         },
-        "name" : {
-          "type" : "string",
-          "example" : "Widget Adapter"
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
         },
-        "releaseDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2016-08-29T09:12:33.001Z"
-        },
-        "manufacturer" : {
-          "$ref" : "#/definitions/Manufacturer"
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
         }
       }
     },
-    "Manufacturer" : {
-      "required" : [ "name" ],
+    "workCommencedMessage" : {
+      "type" : "object",
+      "description" : "The operations event message of work commenced event provides the ability for Level 3 execution management activities to provide notification of key state changes to work under the control of execution management. The work commenced event is notified when new work commences and includes new work directive and new job response information as well as any relevant material lot/sublot information.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
       "properties" : {
-        "name" : {
-          "type" : "string",
-          "example" : "ACME Corporation"
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
         },
-        "homePage" : {
-          "type" : "string",
-          "format" : "url",
-          "example" : "https://www.acme-corp.com"
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
         },
-        "phone" : {
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
+        }
+      }
+    },
+    "workCompletedMessage" : {
+      "type" : "object",
+      "description" : "The operations message for work completed event provides the ability for Level 3 execution management activities to provide notification of key state changes to work under the control of execution management. The work completed and work aborted events are raised when work is completed or aborted respectively and include job response information, change to work directive information as well as any relevant material lot/sublot information.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
+      "properties" : {
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
+        },
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
+        },
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
+        }
+      }
+    },
+    "workRedirectedMessage" : {
+      "type" : "object",
+      "description" : "The operations event message for work redirected event provides the ability for Level 3 execution management activities to provide notification of key state changes to work under the control of execution management. The work redirected event is notified when existing in flight work is changed. This may take the form of changing one or more existing work directives, or may also result in replacing work directives with new ones. It also includes one or more job responses as well as any relevant material lot/sublot information.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
+      "properties" : {
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
+        },
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
+        },
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
+        }
+      }
+    },
+    "workAbortedMessage" : {
+      "type" : "object",
+      "description" : "The operations event message for work aborted event provides the ability for Level 3 execution management activities to provide notification of key state changes to work under the control of execution management. The work completed and work aborted events are raised when work is completed or aborted respectively and include job response information, change to work directive information as well as any relevant material lot/sublot information.",
+      "required" : [ "jobResponses", "materialLots", "materialSublots" ],
+      "properties" : {
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
+        },
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
+        },
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
+        }
+      }
+    },
+    "workAlertExecutedMessage" : {
+      "type" : "object",
+      "description" : "The operations event message for work alert executed event provides the ability for Level 3 execution management activities to provide notification of key work alerts during work under the control of execution management. A notification of a Level 3 event shall be defined as a work alert. Not all events warrant creating a work alert. A work alert does not require acknowledgement. If acknowledgement is needed, then an alarm model may be used (see ISA-18.00.02 (IEC 62682), for information on alarms). Work alerts may be generated by any Level 3 activity. Work alert definitions are descriptions of the available types of work alerts.",
+      "required" : [ "workAlerts", "jobResponses", "materialLots", "materialSublots", "workMasterCapabilities", "workRecords" ],
+      "properties" : {
+        "workAlerts" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workAlert"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workAlert"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workAlert"
+              }
+            }
+          }
+        },
+        "jobResponses" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/jobResponse"
+              }
+            }
+          }
+        },
+        "materialLots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialLot"
+              }
+            }
+          }
+        },
+        "materialSublots" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/materialSublot"
+              }
+            }
+          }
+        },
+        "workMasterCapabilities" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workMasterCapability"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workMasterCapability"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workMasterCapability"
+              }
+            }
+          }
+        },
+        "workRecords" : {
+          "type" : "object",
+          "required" : [ "created", "changed", "deleted" ],
+          "properties" : {
+            "created" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workRecord"
+              }
+            },
+            "changed" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workRecord"
+              }
+            },
+            "deleted" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/workRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    "jobResponse" : {
+      "type" : "object",
+      "description" : "The responses from manufacturings execution of work that are associated with a job order shall be defined as a job response. There may be one or more job responses for a single job order if the manufacturing facility needs to split the job order into smaller elements of work. Where smaller elements of work are reported, the job response may be for a specific workflow specification or a workflow specification node. A job order may include the status of the request, such as the percentage complete, a finished status, or an aborted status.",
+      "required" : [ "id", "Description", "jobOrderId", "workDirectiveId" ],
+      "properties" : {
+        "id" : {
           "type" : "string",
-          "example" : "408-867-5309"
+          "description" : "An identification within the associated job response. Required attribute.The Id is used in other parts of the model when the job response needs to be identified.",
+          "example" : "JR-Block XYZ"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. Additional information about the job response.",
+          "example" : "JR Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "jobOrderId" : {
+          "type" : "string",
+          "description" : "The job order Id related this job response. An identification of the associated job order. Job responses may not relate to a job order. A Job response may be a report on all work for a specific time or reported on by plant floor events.",
+          "example" : "JON-EXE 1.1"
+        },
+        "workMasterId" : {
+          "type" : "string",
+          "description" : "The work master Id related to this job response.",
+          "example" : "WM-EXE 1.1"
+        },
+        "workDirectiveId" : {
+          "type" : "string",
+          "description" : "The work directive Id related to this job response.",
+          "example" : "WD-EXE 1.1"
+        },
+        "workflowSpecificationId" : {
+          "type" : "string",
+          "description" : "The workflow specification Id related this job response.",
+          "example" : "WF-EXE 1.1"
+        },
+        "workflowSpecificationNodeId" : {
+          "type" : "string",
+          "description" : "The workflow specification node Id related this job response.",
+          "example" : "WFN-EXE 1.1"
+        },
+        "workflowSpecificationConnectionId" : {
+          "type" : "string",
+          "description" : "The workflow specification connection Id related this job response.",
+          "example" : "WFC-EXE 1.1"
+        },
+        "workType" : {
+          "type" : "string",
+          "description" : "Describes the category of work. Defined values are production, maintenance,  quality, inventory, or  mixed. “Mixed” can be used when the job response contains resources and routing information required to perform several types of work.",
+          "example" : "production"
+        },
+        "materialActuals" : {
+          "type" : "array",
+          "description" : "The material actual(s) related to this job response. An identification of a material that was used in the operations request shall be presented as a material actual. Material actuals contain definitions of materials that may have be consumed, produced, replaced, sampled, or otherwise used in manufacturing. A material actual may be defined as follows by containing an assembly of material actuals and as part of an assembly of material actuals. a)A material actual may define an assembly of zero or more material actuals. b)A material actual may be an assembly element of zero or more material actuals. c)An assembly may be defined as a permanent or transient assembly of material actuals. d)An assembly may be defined as physical or a logical assembly of material actuals.",
+          "items" : {
+            "$ref" : "#/definitions/materialActual"
+          }
+        },
+        "equipmentActuals" : {
+          "type" : "array",
+          "description" : "The equipment actual(s) related to this job response.An identification of an equipment capability used during a specified segment shall be presented as an equipment actual. In operations functions, equipment can be a resource to carry out tasks. Equipment actual shall include the identification of the equipment used, usually identifying a specific piece of equipment. Specific information about equipment actuals shall be presented in equipment actual properties.",
+          "items" : {
+            "$ref" : "#/definitions/equipmentActual"
+          }
+        },
+        "personnelActuals" : {
+          "type" : "array",
+          "description" : "The personnel actual(s) related to this job response. An identification of a personnel capability used during a specified segment response shall be presented as personnel actual. In operational functions, people can be a resource to carry out tasks. Personnel actuals shall include the identification of each resource used, usually identifying a specific personnel capability or personnel class, such as end-point transmission assembly operators, or personnel IDs such as Jean Smith or SS# 999-123-4567. Specific information about personnel actuals shall be presented in personnel actual properties.",
+          "items" : {
+            "$ref" : "#/definitions/personnelActual"
+          }
+        },
+        "physicalAssetActuals" : {
+          "type" : "array",
+          "description" : "The physical asset actual(s) related to this job response. An identification of a physical asset capability used during a specified segment shall be presented as a physical asset actual. In operations functions, physical asset can be a resource to carry out tasks. Physical asset actual shall include the identification of the physical asset used, usually identifying a specific piece of physical asset. Specific information about physical asset actuals shall be presented in physical asset actual properties.",
+          "items" : {
+            "$ref" : "#/definitions/physicalAssetActual"
+          }
+        },
+        "jobResponseData" : {
+          "type" : "array",
+          "description" : "Data associated with this job response.",
+          "items" : {
+            "$ref" : "#/definitions/jobResponseData"
+          }
+        },
+        "startTime" : {
+          "type" : "string",
+          "description" : "The actual starting time of information in the job response.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "endTime" : {
+          "type" : "string",
+          "description" : "The actual ending time of information in the job response.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "jobState" : {
+          "type" : "string",
+          "description" : "Indicates the state of the job response. Defined values are  waiting, ready,  running,  completed, aborted,  held,  suspended, and closed.",
+          "example" : "In Process"
+        }
+      }
+    },
+    "materialActual" : {
+      "type" : "object",
+      "description" : "An identification of a material that was requested in the operations request and produced to a scheduled a job order shall be presented as a material actual. Material actuals contain definitions of materials that may have be consumed, produced, replaced, sampled, or otherwise used in manufacturing. A material actual may be defined as follows by containing an assembly of material actuals and as part of an assembly of material actuals. a) A material actual may define an assembly of zero or more material actuals. b) A material actual may be an assembly element of zero or more material actuals. c) An assembly may be defined as a permanent or transient assembly of material actuals. d) An assembly may be defined as physical or a logical assembly of material actuals.",
+      "required" : [ "id", "materialClassIds and/or materialDefinitionIds", "materialLots or materialSublots or materialLotIds or materialSublotIds", "quantity", "quantityUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Define a unique identification of a specific material actual within the scope of the information exchanged (operations and work capability, schedule, performance, …). Required attribute.",
+          "example" : "Block XYZ"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material actual.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "materialClassIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated material class or set of material classes of the material actual for a specific job response. The associated material lot supports the material class property(s) associated with the material class.",
+          "example" : "HG1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialDefinitionIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated material definition or set of material definitions of the material actual for a specific job response. The associated material lot supports the material definition property(s) associated with the material definition.",
+          "example" : "HG1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialActualChildIds" : {
+          "type" : "array",
+          "description" : "This child material actual(s) is part of the material actual as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialLotIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated existing material lot Id or set of existing material lot Ids of the material actual for a specific segment response or workflow specification node; only material lot Id is specified for existing material lot. Typically, a material definition is specified.  If a created material lot or set of created material lots, the material actuals are to be identified in materialLots element as a full complex element.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialSublotIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated existing material sublot Id or set of existing material sublot Ids of the material actual for a specific segment response or workflow specification node; only material sublot Id is specified for existing material sublot. Typically, a material definition is specified.  If a created material sublot or set of created material sublots, the material actuals are to be identified in materialSublots element as a full complex element.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialLots" : {
+          "type" : "array",
+          "description" : "Identifies the associated created material lot element as a full complex element or set of created material lots of the material actual for a specific segment response or workflow specification node.  If an existing material lot, only material lot Id is specified. Typically, material definition is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "$ref" : "#/definitions/materialLot"
+          }
+        },
+        "materialSublots" : {
+          "type" : "array",
+          "description" : "Identifies the associated material sublot element as a full complex element or set of created material sublot of the material actual for a specific segment response or workflow specification node. If an existing material sublot, only material sublot Id is specified. Typically, either a material class or material definition is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "$ref" : "#/definitions/materialSublot"
+          }
+        },
+        "materialDefinitions" : {
+          "type" : "array",
+          "description" : "Identifies the associated created material definition element as a full complex element or set of created material defintions of the material actual for a specific segment response, job response, or workflow specification node.  If an existing material definition, only material defnition Id is specified. Typically, an existing material definition is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "$ref" : "#/definitions/materialDefinition"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "Spatially defines the material resource(s) specified by this material actual as a 0-dimensional point, 1-dimensional line, or 2-dimensional shape or 3-dimensional solid.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "storageLocation" : {
+          "description" : "Identifies the storage location of the material resource(s) specified by this material actual.",
+          "example" : "Stock Pile 4D"
+        },
+        "storageLocationType" : {
+          "description" : "Indicates whether the storage location attribute refers to an operational location, equipment or physical asset object, or contains a description of the storage location. Mandatory where a storage location is specified.  Defined values are 1) operational location: storage location attribute references an operational location; 2) equipment: storage location attribute references an equipment object; 3) physical asset: storage location attribute references a physical asset; 4) description: storage location attribute contains a description of the storage location, such as a street address.",
+          "example" : "physical asset"
+        },
+        "assemblyType" : {
+          "description" : "Defines the type of the assembly. Defined types are physical, the components of the assembly are physically connected or in the same area; and logical, the components of the assembly are not necessarily physically connected or in the same area.",
+          "example" : "physical"
+        },
+        "assemblyRelationship" : {
+          "description" : "Defines the type of the relationships. Defined types are  permanent, an assembly that is not intended to be split during the production process; and transient, a temporary assembly using during  production, such as a pallet of different materials or a batch kit.",
+          "example" : "permanent"
+        },
+        "materialUse" : {
+          "type" : "string",
+          "description" : "Defines the expected use of the material class, material definition, material lot, or material sublot in the context of the segment response or workflow specification node. Defined values for production operations are consumable, consumed, produced, by-product produced, co-product produced, and yield produced. Defined values for maintenance operations are consumable, material consumed, and material produced. Defined values for quality test operations are consumable, destructive sample, returned sample, and retained sample. Defined values for inventory operations are consumable, material consumed, material produced, and inventoried.",
+          "example" : "produced"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "Specifies the amount of material for the specified material use. Applies to each member of the material lot, material sublot, materials definition, or material class sets. ",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "testResults" : {
+          "type" : "array",
+          "description" : "This material actual reports the test result in a job response",
+          "example" : "TR IN-SITU 1.1",
+          "items" : {
+            "$ref" : "#/definitions/testResult"
+          }
+        },
+        "materialActualProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/materialActualProperty"
+          }
+        }
+      }
+    },
+    "materialActualProperty" : {
+      "type" : "object",
+      "description" : "Specific information about material actuals related to this job response shall be presented in material actual properties. Specific properties that are required for a material actual shall be presented as material actual properties. Material actual properties may contain nested material actual properties.",
+      "required" : [ "id", "If existing, materialDefinitionPropertyIds and materialLotPropertyIds", "If new created, materialDefinitionProperties and materialLotProperties", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of a specific material actual property.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material actual property.",
+          "example" : "Dig Rate"
+        },
+        "materialClassPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the material class property Ids. If the material definition supports a material class, the material class property(s) is applied in the material definition property(s). This material definition property maps to the corresponding material class property.",
+          "example" : "IN-SITU Propery 1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialDefinitionPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies existing (not new created) material definition property Ids. If the material lot supports a material definition, the material definition property(s) is applied in the material lot property(s). This material lot property maps to the corresponding material definition property.",
+          "example" : "IN-SITU Propery 1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialLotPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies existing (not new created) material lot property Ids which shall be presented as material lot properties. Each material can have unique values for zero or more material lot properties. A material lot property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may be evaluated to the test specification criteria in the test specification that references the evaluated property where they may be recorded in an evaluated criterion result attribute in the test result. A material lot property is associated with either a material lot or a material sublot. When associated with a material lot it specifies a property value for all material sublots, when associated with a material sublot it specifies a property value for a single material sublot.",
+          "example" : "IN-SITU Propery 1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialDefinitionProperties" : {
+          "type" : "array",
+          "description" : "Specifies the new created material definition property element as a full complex element. If the created or existing material lot supports a material definition, the material definition property(s) is applied in the material lot property(s). This material lot property maps to the corresponding material definition property. If an created or existing material lot uses an existing material definition, only material definition property Ids are specified.",
+          "example" : "IN-SITU Propery 1",
+          "items" : {
+            "$ref" : "#/definitions/materialDefinitionProperty"
+          }
+        },
+        "materialLotProperties" : {
+          "type" : "array",
+          "description" : "Specifies the new created material lot property element as a full complex elements for properties of a created or existing material lot which shall be presented as material lot properties. If an existing material lot uses an existing material lot propertiesdefinition, only material lot property Ids are specified. Each material can have unique values for zero or more material lot properties. A material lot property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may be evaluated to the test specification criteria in the test specification that references the evaluated property where they may be recorded in an evaluated criterion result attribute in the test result. A material lot property is associated with either a material lot or a material sublot. When associated with a material lot it specifies a property value for all material sublots, when associated with a material sublot it specifies a property value for a single material sublot.",
+          "example" : "IN-SITU Propery 1.1",
+          "items" : {
+            "$ref" : "#/definitions/materialLotProperty"
+          }
+        },
+        "materialActualPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested material actual property(s) makes up part of this material actual property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the material actual property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated material actual property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "equipmentActual" : {
+      "type" : "object",
+      "description" : "An identification of an equipment capability used during a specified segment or workflow specification node shall be presented as an equipment actual. In operations functions, equipment can be a resource to carry out tasks. Equipment actual shall include the identification of the equipment used, usually identifying a specific piece of equipment. Specific information about equipment actuals shall be presented in equipment actual properties.",
+      "required" : [ "Id", "equipmentIds", "quantity", "quantityUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Define a unique identification of a specific equipment actual within the scope of the information exchanged (operations and work capability, schedule, performance, …). Required attribute.",
+          "example" : "Digger X"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the equipment actual.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "equipmentClassIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated equipment class or set of equipment classes of the equipment actual for a specific job response. The associated equipment supports the equipmet class property(s) associated with the equipment class.",
+          "example" : "EC Digger X1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "equipmentActualChildIds" : {
+          "type" : "array",
+          "description" : "This child equipment actual(s) is part of the equipment actual as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "equipmentIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated equipment or set of equipment of the equipment actual for a specific segment or workflow specification node.  If an existing equipment instance, only equipment Id is specified. Typically, either a equipment class is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "Spatially defines the equipment resource(s) specified by this equipment actual as a 0-dimensional point, 1-dimensional line, or 2-dimensional shape or 3-dimensional solid.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "operationalLocation" : {
+          "description" : "Identifies the operational location of the equipment resource(s) specified by this equipment actual.",
+          "example" : "Stock Pile 4D"
+        },
+        "operationalLocationType" : {
+          "description" : "Indicates whether the operational location attribute refers to an operational location object, or contains a description of the operational location. Mandatory where an operational location attribute is specified. Defined values are 1) operational location: operational location attribute references an operational location; 2) description: operational location attribute contains a description of the operational location, such as a street address.",
+          "example" : "description"
+        },
+        "equipmentUse" : {
+          "type" : "string",
+          "description" : "Defines the actual use of the equipment class or equipment.",
+          "example" : "queue"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "Specifies the amount of equipment resources used in parent segment or workflow specificaction node. Applies to each member of the equipment and equipment class sets.",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "testResults" : {
+          "type" : "array",
+          "description" : "This equipment actual reports the test result in a job response",
+          "example" : "TR IN-SITU 1.1",
+          "items" : {
+            "$ref" : "#/definitions/testResult"
+          }
+        },
+        "equipmentActualProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/equipmentActualProperty"
+          }
+        }
+      }
+    },
+    "equipmentActualProperty" : {
+      "type" : "object",
+      "description" : "Specific information about equipment actuals related to this job response shall be presented in equipment actual properties. Specific properties that are required for a equipment actual shall be presented as equipment actual properties. Equipment actual properties may contain nested equipment  actual properties.",
+      "required" : [ "id", "equipmentClassPropertyIds and/or equipmentPropertyIds", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of a specific equipment actual property.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the equipment actual property.",
+          "example" : "Dig Rate"
+        },
+        "equipmentClassPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the equipment class property Ids. If the equipment supports a equipment class, the equipment class property(s) is applied in the equipment property(s). This equipment property maps to the corresponding equipment class property.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "equipmentPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the Ids for properties of a equipment which shall be presented as equipment properties. Each equipment can have unique values for zero or more equipment properties. A equipment property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may be evaluated to the test specification criteria in the test specification that references the evaluated property where they may be recorded in an evaluated criterion result attribute in the test result.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "equipmentActualPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested equipment actual property(s) makes up part of this equipment actual property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the equipment actual property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated equipment actual property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "personnelActual" : {
+      "type" : "object",
+      "description" : "An identification of an personnel capability used during a specified segment or workflow specification node shall be presented as an personnel actual. In operations functions, person can be a resource to carry out tasks. Personnel actual shall include the identification of the person used, usually identifying a specific person. Specific information about personnel actuals shall be presented in personnel actual properties.",
+      "required" : [ "Id", "personIds", "quantity", "quantityUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Define a unique identification of a specific personnel actual within the scope of the information exchanged (operations and work capability, schedule, performance, …). Required attribute.",
+          "example" : "Digger X"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the personnel actual.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "personnelClassIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated personnel class or set of personnel classes of the personnel actual for a specific workflow specification node or job response. The associated person supports the personnel class property(s) associated with the personnel class.",
+          "example" : "EC Digger X1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "personnelActualChildIds" : {
+          "type" : "array",
+          "description" : "This child personnel actual(s) is part of the personnel actual as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "personIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated person or set of personnel of the personnel actual for a specific segment or workflow specification node in a job response.  If an existing person, only person Id is specified. Typically, a personnel class is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "Spatially defines the personnel resource(s) specified by this personnel actual as a 0-dimensional point, 1-dimensional line, or 2-dimensional shape or 3-dimensional solid.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "operationalLocation" : {
+          "description" : "Identifies the operational location of the personnel resource(s) specified by this personnelactual.",
+          "example" : "Stock Pile 4D"
+        },
+        "operationalLocationType" : {
+          "description" : "Indicates whether the operational location attribute refers to an operational location object, or contains a description of the operational location. Mandatory where an operational location attribute is specified. Defined values are 1) operational location: operational location attribute references an operational location; 2) description: operational location attribute contains a description of the operational location, such as a street address.",
+          "example" : "description"
+        },
+        "personnelUse" : {
+          "type" : "string",
+          "description" : "Defines the actual use of the personnel class or person.",
+          "example" : "queue"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "Specifies the amount of personnel resources used in parent segment. Applies to each member of the person and personnel class sets.",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "testResults" : {
+          "type" : "array",
+          "description" : "This personnel actual reports the test result in a job response",
+          "example" : "TR IN-SITU 1.1",
+          "items" : {
+            "$ref" : "#/definitions/testResult"
+          }
+        },
+        "personnelActualProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/personnelActualProperty"
+          }
+        }
+      }
+    },
+    "personnelActualProperty" : {
+      "type" : "object",
+      "description" : "Specific information about personnel actuals related to this workflow specification node or job response shall be presented in personnel actual properties. Specific properties that are required for a personnel actual shall be presented as personnel actual properties. Personnel actual properties may contain nested personnel actual properties.",
+      "required" : [ "id", "personnelClassPropertyIds and/or personPropertyIds", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of a specific personnel actual property.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the personnel actual property.",
+          "example" : "Dig Rate"
+        },
+        "personnelClassPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the personnel class property Ids. If the person supports a personnel class, the personnel class property(s) is applied in the person property(s). The person property maps to the corresponding personnel class property.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "personPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the Ids for properties of a person which shall be presented as person properties. Each person can have unique values for zero or more person properties. A person property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may be evaluated to the test specification criteria in the test specification that references the evaluated property where they may be recorded in an evaluated criterion result attribute in the test result.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "personnelActualPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested personnel actual property(s) makes up part of this personnel actual property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the personnel actual property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated personnel actual property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "physicalAssetActual" : {
+      "type" : "object",
+      "description" : "An identification of an physical asset capability used during a specified segment or workflow specification node shall be presented as an physical asset actual. In operations functions, equipment can be a resource to carry out tasks. Physical asset actual shall include the identification of the physical asset used, usually identifying a specific piece of physical asset. Specific information about physical asset actuals shall be presented in physical asset actual properties.",
+      "required" : [ "Id", "physicalAssetIds", "quantity", "quantityUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Define a unique identification of a specific physical asset actual within the scope of the information exchanged (operations and work capability, schedule, performance, …). Required attribute.",
+          "example" : "Digger X"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the physical asset actual.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "physicalAssetClassIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated physical asset class or set of physical asset classes of the physical asset actual for a specific job response. The associated physical asset supports the physical asset class property(s) associated with the physical asset class.",
+          "example" : "EC Digger X1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "physicalAssetActualChildIds" : {
+          "type" : "array",
+          "description" : "This child physical asset actual(s) is part of the physical asset actual as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "physicalAssetIds" : {
+          "type" : "array",
+          "description" : "Identifies the associated physical asset or set of physical asset of the physical asset actual for a specific segment or workflow specification node.  If an existing physical asset instance, only physical asset Id is specified. Typically, either a physical asset class is specified.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "Spatially defines the physical asset resource(s) specified by this physical asset actual as a 0-dimensional point, 1-dimensional line, or 2-dimensional shape or 3-dimensional solid.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "physicalLocation" : {
+          "description" : "Identifies the operational location as a physical location of the physical asset resource(s) specified by this physical asset actual.",
+          "example" : "Stock Pile 4D"
+        },
+        "physicalLocationType" : {
+          "description" : "Indicates whether the physical location attribute refers to an operational location object, or contains a description of the physical location. Mandatory where a physical location attribute is specified. Defined values are 1)  operational location: physical location attribute references an operational location; 2) description: physical location attribute contains a description of the physical location, such as a street address.",
+          "example" : "description"
+        },
+        "physicalAssetUse" : {
+          "type" : "string",
+          "description" : "Defines the actual use of the physical asset class or physical asset. for a maintenance operations exmaple: repaired, removed, replacement, calibrated, modified, and improved.",
+          "example" : "queue"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "Specifies the amount of physical asset resources used in parent segment or workflow specificaction node. Applies to each member of the physical asset and physical asset class sets.",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "testResults" : {
+          "type" : "array",
+          "description" : "This physical asset actual reports the test result in a job response",
+          "example" : "TR IN-SITU 1.1",
+          "items" : {
+            "$ref" : "#/definitions/testResult"
+          }
+        },
+        "physicalAssetActualProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/physicalAssetActualProperty"
+          }
+        }
+      }
+    },
+    "physicalAssetActualProperty" : {
+      "type" : "object",
+      "description" : "Specific information about physical asset actuals related to this job response shall be presented in physical asset actual properties. Specific properties that are required for a physical asset actual shall be presented as physical asset actual properties. Physical asset actual properties may contain nested physical asset actual properties.",
+      "required" : [ "id", "physicalAssetClassPropertyIds and/or physicalAssetPropertyIds", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of a specific physical asset actual property.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the physical asset actual property.",
+          "example" : "Dig Rate"
+        },
+        "physicalAssetClassPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the physical asset class property Ids. If the physical asset supports a physical asset class, the physical asset class property(s) is applied in the physical asset property(s). This physical asset property maps to the corresponding physical asset class property.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "physicalAssetPropertyIds" : {
+          "type" : "array",
+          "description" : "Specifies the Ids for properties of a physical asset which shall be presented as physical asset properties. Each physical asset can have unique values for zero or more physical asset properties. A physical asset property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may be evaluated to the test specification criteria in the test specification that references the evaluated property where they may be recorded in an evaluated criterion result attribute in the test result.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "physicalAssetActualPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested physical asset actual property(s) makes up part of this physical asset actual property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the physical asset actual property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated physical asset actual property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "materialDefinition" : {
+      "type" : "object",
+      "description" : "A representation of a material with similar characteristics for the purpose of manufacturing operations definition, scheduling, capability and performance shall be presented as a material definition. A material definition may be tested by the evaluation of the test specification criteria in the test specification that references the evaluated property and may be recorded in an evaluated criterion result attribute in the test result. Material definitions can include city water, hydrochloric acid from Vendor A, and grade B aluminum. Any material lot shall be associated with one material definition.",
+      "required" : [ "id", "version", "effectiveFrom", "effectiveTo" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "A unique identification of a specific material definition, within the scope of the information exchanged (operations or work capability, schedule, performance, …) The Id shall be used in other parts of the model when the material definition needs to be identified, such as the operations or work capability for this material definition, or a operations or work response identifying the material definition used.",
+          "example" : "HG1"
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The version of this Material Definition described in this message.",
+          "example" : 1
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material definition.",
+          "example" : "High Grade 1"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "materialClassIds" : {
+          "type" : "array",
+          "description" : "The material class(s) that this material definition describes.",
+          "example" : "ER-HG",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialDefinitionChildIds" : {
+          "type" : "array",
+          "description" : "The material definition(s) that are part of this materail definition as a whole.",
+          "example" : "ER-DEF-HG",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "The location or footprint of this item.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "assemblyType" : {
+          "description" : "Defines the type of the assembly. Defined types are physical, the components of the assembly are physically connected or in the same area; and logical, the components of the assembly are not necessarily physically connected or in the same area.",
+          "example" : "physical"
+        },
+        "assemblyRelationship" : {
+          "description" : "Defines the type of the relationships. Defined types are  permanent, an assembly that is not intended to be split during the production process; and transient, a temporary assembly using during production, such as a pallet of different materials or a batch kit.",
+          "example" : "permanent"
+        },
+        "testSpecificationIds" : {
+          "type" : "array",
+          "description" : "The test specification(s) used to evaluate this testable object.",
+          "example" : "TS IN-SITU 1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "effectiveFrom" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this Material Definition is applicable from.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "effectiveTo" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this Material Definition is applicable to.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "materialDefinitionProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/materialDefinitionProperty"
+          }
+        }
+      }
+    },
+    "materialDefinitionProperty" : {
+      "type" : "object",
+      "description" : "Properties of a material definition shall be presented as material definition properties. A material definition may define zero or more material definition properties. A material definition property may be tested to the evaluated property in a test specification where the measured results may be recorded in a property measurement attribute in a test result. The measured results may also be evaluated to the test specification criteria in the test specification that references the evaluated property attribute where they may be recorded in an evaluated criterion result attribute in the test result. Material definition property(s) may contain nested material definition property(s).",
+      "required" : [ "id", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of the specific material definition property.",
+          "example" : "Fe"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material definition property.",
+          "example" : "Iron"
+        },
+        "propertyType" : {
+          "type" : "string",
+          "description" : "Defines the type of the material definition property. Defined types are 1) class type, the property value is defined for the class and there is no value associated with an instance; 2)  instance type, the property value of the class is undefined; and 3) default type, the property value is defined for the class as the default instance value, but individual instances of the class may redefine specific values.",
+          "example" : "Instance type"
+        },
+        "materialClassPropertyId" : {
+          "type" : "string",
+          "description" : "If the material definition supports a material class, the material class property(s) is applied in the material definition property(s). This material definition property maps to the corresponding material class property.",
+          "example" : "IN-SITU Propery 1.1.1"
+        },
+        "materialDefinitionsPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested material definition property(s) makes up part of this material definition property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the material definition property.",
+          "example" : "62"
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated material definition property value, if applicable.",
+          "example" : "percentage"
+        }
+      }
+    },
+    "materialLot" : {
+      "type" : "object",
+      "description" : "A uniquely identified specific amount of material, either countable or weighable shall be presented as a material lot. A material lot describes the planned or actual total quantity or amount of material available, its current state, and its specific property values. A material lot may be tested by the evaluation of a test specification.",
+      "required" : [ "id", "version", "materialDefinitionId", "effectiveFrom", "effectiveTo" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "A unique identification of a specific material lot, within the scope of the information exchanged (operations and work capability, schedule, performance, …) The ID shall be used in other parts of the model when the material lot needs to be identified, such as the operations or work capability for this material lot, or a oerations, work, and work response identifying the material lot used.",
+          "example" : "Block XYZ"
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The version number of this instance of the material lot.",
+          "example" : 1
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material lot.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "materialLotChildIds" : {
+          "type" : "array",
+          "description" : "This child material lot(s) is part of the material lot as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialSublotParentId" : {
+          "type" : "string",
+          "description" : "This parent material sublot is whole of the material lot as the part.",
+          "example" : "In-Situ"
+        },
+        "materialSublotChildIds" : {
+          "type" : "array",
+          "description" : "This child material sublot(s) is part of the material lot as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialDefinitionIds" : {
+          "type" : "array",
+          "description" : "Identifies the material definition that defines this material lot. This material lot objects support the material definition property(s) associated with the material definition. The material lot can act as a container for other objects where it does not have material definition association.",
+          "example" : "HG1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "The location or footprint of this item.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "assemblyType" : {
+          "description" : "Defines the type of the assembly. Defined types are physical, the components of the assembly are physically connected or in the same area; and logical, the components of the assembly are not necessarily physically connected or in the same area.",
+          "example" : "physical"
+        },
+        "assemblyRelationship" : {
+          "description" : "Defines the type of the relationships. Defined types are  permanent, an assembly that is not intended to be split during the production process; and transient, a temporary assembly using during  production, such as a pallet of different materials or a batch kit.",
+          "example" : "permanent"
+        },
+        "testSpecificationIds" : {
+          "type" : "array",
+          "description" : "The test specification(s) used to evaluate this testable object.",
+          "example" : "TS IN-SITU 1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "effectiveFrom" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this state of the Material Lot is effective from.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "effectiveTo" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this state of the Material Lot expires.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "Status of the material lot. For example, released, approved, blocked, in process, in quality check.",
+          "example" : "In Process"
+        },
+        "disposition" : {
+          "type" : "string",
+          "description" : "Planning and logistics disposition of a material lot or assembly of material lots. Defined values for the disposition of a material lot are 1)  planned, a material lot that does not yet physically exist, is assigned to an operations request (segment requirement) or work request (Part 4 object) or job order (Part 4 object); 2) in process, the material lot is in the process of being worked on; 3) restricted, a material lot is not permitted for normal use due to a restriction condition; 4) unrestricted, material lot is permitted for normal use without restriction; 5) closed:   material lot has been reconciled as completely consumed, sold or disposed of.",
+          "example" : "Planned"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "The quantity of the material lot.",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "materialLotProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/materialLotProperty"
+          }
+        }
+      }
+    },
+    "materialLotProperty" : {
+      "type" : "object",
+      "description" : "Each material can have unique values for zero or more material lot properties, such as a specific pH value for the specific lot of material, or a specific density for the lot of material. A material lot property may be tested by the execution of a material test specification with results exchanged in a QA test specification result. Material lot properties may contain nested material lot properties.",
+      "required" : [ "id", "materialDefinitionPropertyId", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of a specific material lot property.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material lot property.",
+          "example" : "Dig Rate"
+        },
+        "materialDefinitionPropertyId" : {
+          "type" : "string",
+          "description" : "If the material definition supports a material class, the material class property(s) is applied in the material definition property(s). This material definition property maps to the corresponding material class property.",
+          "example" : "IN-SITU Propery 1.1.1"
+        },
+        "materialLotPropertyChildIds" : {
+          "type" : "array",
+          "description" : "The nested material lot property(s) makes up part of this material lot property as the whole.",
+          "example" : "IN-SITU Propery 1.1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the material lot property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated material lot property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "materialSublot" : {
+      "type" : "object",
+      "description" : "A uniquely identified specific amount of material, either countable or weighable shall be presented as a material sublot. A material sublot describes the planned or actual total quantity or amount of material available, its current state, and its specific property values. A material sublot may be tested by the evaluation of a test specification.",
+      "required" : [ "id", "version", "materialDefinitionPropertyId", "effectiveFrom", "effectiveTo" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "A unique identification of a specific material sublot, within the scope of the information exchanged (operations and work capability, schedule, performance, …) The ID shall be used in other parts of the model when the material sublot needs to be identified, such as the operations or work capability for this material sublot, or a oerations, work, and work response identifying the material sublot used.",
+          "example" : "Block XYZ"
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The version number of this instance of the material sublot.",
+          "example" : 1
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the material sublot.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "materialLotChildIds" : {
+          "type" : "array",
+          "description" : "This child material lot(s) is part of the material sublot as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "materialLotParentId" : {
+          "type" : "string",
+          "description" : "This parent material lot is whole of the material sublot as the part.",
+          "example" : "In-Situ"
+        },
+        "materialSublotChildIds" : {
+          "type" : "array",
+          "description" : "This child material sublot(s) is part of the material sublot as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "spatialDefinition" : {
+          "type" : "array",
+          "description" : "The location or footprint of this item.",
+          "items" : {
+            "$ref" : "#/definitions/spatialDefinition"
+          }
+        },
+        "assemblyType" : {
+          "description" : "Defines the type of the assembly. Defined types are physical, the components of the assembly are physically connected or in the same area; and logical, the components of the assembly are not necessarily physically connected or in the same area.",
+          "example" : "physical"
+        },
+        "assemblyRelationship" : {
+          "description" : "Defines the type of the relationships. Defined types are  permanent, an assembly that is not intended to be split during the production process; and transient, a temporary assembly using during  production, such as a pallet of different materials or a batch kit.",
+          "example" : "permanent"
+        },
+        "testSpecificationIds" : {
+          "type" : "array",
+          "description" : "The test specification(s) used to evaluate this testable object.",
+          "example" : "TS IN-SITU 1.1",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "effectiveFrom" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this state of the Material Lot is effective from.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "effectiveTo" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute to meet BHP requirement. The timestamp that this state of the Material Lot expires.",
+          "example" : "ISO 8601: yyyy-mm-ddThh:mm:ss for local time as 2002-09-22T09:15:23"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "Status of the material lot. For example, released, approved, blocked, in process, in quality check.",
+          "example" : "In Process"
+        },
+        "disposition" : {
+          "type" : "string",
+          "description" : "Planning and logistics disposition of a material lot or assembly of material lots. Defined values for the disposition of a material lot are 1)  planned, a material lot that does not yet physically exist, is assigned to an operations request (segment requirement) or work request (Part 4 object) or job order (Part 4 object); 2) in process, the material lot is in the process of being worked on; 3) restricted, a material lot is not permitted for normal use due to a restriction condition; 4) unrestricted, material lot is permitted for normal use without restriction; 5) closed:   material lot has been reconciled as completely consumed, sold or disposed of.",
+          "example" : "Planned"
+        },
+        "quantity" : {
+          "type" : "number",
+          "description" : "The quantity of the material lot.",
+          "example" : 5000
+        },
+        "quantityUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated quantity, if applicable.",
+          "example" : "Tonnes"
+        },
+        "materialLotProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/materialLotProperty"
+          }
+        }
+      }
+    },
+    "jobResponseData" : {
+      "type" : "object",
+      "description" : "Additional information related to the actual work made shall be presented as job response data.",
+      "required" : [ "id", "description", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The identification of the job response data. Required attribute.",
+          "example" : "Block XYZ"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Contains additional information and descriptions of the job response data.",
+          "example" : "ER Crusher"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "jobResponseDataChildIds" : {
+          "type" : "array",
+          "description" : "This child job response data element(s) is part of the job response data as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the job response data.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated job response data value, if applicable.",
+          "example" : "Tonnes/Hour"
+        }
+      }
+    },
+    "spatialDefinition" : {
+      "type" : "object",
+      "description" : "The spatial definition provides a means of communicating 0-dimensional point, 1-dimensional line, or 2-dimensional shape or 3-dimensional solid geospatial location data for planning/scheduling, actuals, resources, and analytics. Spatial definition identifies a value and the pre-defined coordinate reference system using following attributes a)  value; b)  format; c)  spatial reference identifier (SRID); and d)  SRID authority. A fully qualified spatial definition exchange has all 4 attributes as a minimum.  In some information exchanges, sending and receiving applications may have a specified agreement on format, SRID, and SRID authority. Spatial definition is distinct from, and separate to storage location and physical location. Storage location attribute is defined for material lots and material sublots as a non-spatial definition of location. The physical location attribute logically identifies a “place” which is actual physical location of the physical asset.",
+      "properties" : {
+        "value" : {
+          "type" : "string",
+          "description" : "A string serialization EXAMPLE 1 UN/CEFACT CCTS: TextType) of the geospatial information in the format indicated in the format attribute.",
+          "example" : "POLYGON ( (-2594646.99104 11815676.18456, -2594645.14848 11815683.08856, -2594646.99104 11815676.18456 ) )"
+        },
+        "format" : {
+          "type" : "string",
+          "description" : "An enumerator that determines the format of the value attribute.",
+          "example" : "WKT"
+        },
+        "srid" : {
+          "type" : "string",
+          "description" : "SRID is the Spatial Reference Identifier which identifies the coordinate reference system to identify a pre-defined coordinate reference system (pre-configured into communication systems). An identifier from the SRID Authority.",
+          "example" : "6283 (Geocentric Datum of Australia 1994)"
+        },
+        "sridAuthority" : {
+          "type" : "string",
+          "description" : "The SRID authority identifies the authority that defines the coordinate reference system identified by the SRID. EXAMPLE 2 EPSG (see http://www.epsg-registry.org/). An organization may choose to define its own SRIDs. EXAMPLE 3 Reference its own authority.",
+          "example" : "EPSG"
+        }
+      }
+    },
+    "testResult" : {
+      "type" : "object",
+      "description" : "Specific information about results from the test evaluation of property measurement of the testable object property of the testable object (personnel class, person, equipment class, equipment, physical asset class, physical asset, material class, material definition, material lot, material sublot) per the test specifications shall be presented as test results. A test result reports the measured results and evaluation of test specification criteria from a test for a specific person, piece of equipment, physical asset, material lot or material sublot. The test result can be exchanged as a first order object or exchanged in an operations event record entry, a resource actual object in a segment response, a work record entry, and a resource actual object in a job response",
+      "required" : [ "id", "description", "testableObjectId", "evaluationDate", "evaluatedCriterionResult", "expiration", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of the specific test result.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the test result.",
+          "example" : "Dig Rate"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "testResultChildIds" : {
+          "type" : "array",
+          "description" : "This child test result(s) is part of the test result as the whole.",
+          "example" : "In-Situ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "testableObjectId" : {
+          "type" : "string",
+          "description" : "The testable object Id and testable object property Id are abstract interface objects representing the object tested to their designated test specification(s). They shall be realized by the following combinations of testable object/testable object property: Personnel class /personnel class property, person /person property, equipment class /equipment class property, equipment /equipment property, physical asset class /physical asset class property, physical asset /physical asset property, material class /material class property, material definition /material definition property, material lot /material lot property, material sublot /material lot property. Refer to ISA-95 Part 2.",
+          "example" : "HG-123"
+        },
+        "operationsTestRequirementId" : {
+          "type" : "string",
+          "description" : "The operations test requirement Id is the object Id that designates the test specification that was applied to execute the test and generate the test result. The operations test requirement Id object specifies the test specification(s) required for evaluation per the operations request and associated work request and job order. Refer to ISA-95 Part 2 for a list of the operations test requirement objects.",
+          "example" : null
+        },
+        "resourceActualId" : {
+          "type" : "string",
+          "description" : "The resource actual Id that reports this test result in a segment response or job response."
+        },
+        "evaluatedCriterionResult" : {
+          "type" : "string",
+          "description" : "Result obtained from evaluation of the associated test specification criteria.",
+          "example" : null
+        },
+        "propertyMeasurements" : {
+          "type" : "array",
+          "description" : "The measurement obtained for each testable object property. The measurement obtained during execution of work master shall be presented as a property measurement. A property measurement reports the measurement obtained for a single testable object property corresponding to an evaluated property of a test specification for a specific person, equipment, physical asset, material lot or material sublot.",
+          "items" : {
+            "$ref" : "#/definitions/propertyMeasurement"
+          }
+        },
+        "evaluationDate" : {
+          "type" : "string",
+          "description" : "Date and time of evaluation of the test result.",
+          "example" : null
+        },
+        "expiration" : {
+          "type" : "string",
+          "description" : "Expiration Date of the expiration of the test result criteria.",
+          "example" : null
+        }
+      }
+    },
+    "propertyMeasurement" : {
+      "type" : "object",
+      "description" : "The measurement obtained during execution of work master (defined in Part 4 of this standard) shall be presented as a property measurement. A property measurement reports the measurement obtained for a single testable object property corresponding to an evaluated property of a test specification for a specific person, equipment, physical asset, material lot or material sublot.",
+      "required" : [ "id", "description", "measurementDate", "evaluatedCriterionResult", "expiration", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of the specific property measurement.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the property measurement.",
+          "example" : "Dig Rate"
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "The value, set of values, or range of the testable object property.",
+          "example" : 3600
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated physical asset actual property value, if applicable.",
+          "example" : "Tonnes/Hour"
+        },
+        "measurementDate" : {
+          "type" : "string",
+          "description" : "The date and time when the measurement was obtained.",
+          "example" : null
+        },
+        "expiration" : {
+          "type" : "string",
+          "description" : "Expiration Date of the expiration of the property measurement.",
+          "example" : null
+        }
+      }
+    },
+    "workAlert" : {
+      "type" : "object",
+      "description" : "A notification of a Level 3 event shall be defined as a work alert. Not all events warrant creating a work alert. A work alert does not require acknowledgement. If acknowledgement is needed, then an alarm model may be used (see ISA-18.00.02 (IEC 62682), for information on alarms). Work alerts may be generated by any Level 3 activity. Work alert definitions are descriptions of the available types of work alerts.",
+      "required" : [ "id", "description", "measurementDate", "evaluatedCriterionResult", "expiration", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "An identification of the specific work alert.",
+          "example" : "DigRate"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the work alert.",
+          "example" : "Dig Rate"
+        },
+        "workAlertDefinitionId" : {
+          "type" : "string",
+          "description" : "Identifies the work alert definition defining this work alert.",
+          "example" : "WAD 1.1"
+        },
+        "messageText" : {
+          "type" : "string",
+          "description" : "Textual content of the work alert.",
+          "example" : 3600
+        },
+        "timestamp" : {
+          "type" : "string",
+          "description" : "Timestamp the work alert was generated.",
+          "example" : null
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
+        "priority" : {
+          "type" : "string",
+          "description" : "Guide to the relative level of importance of the value for the work alert. Standard priority types are defined in this API but can be defined by the execution management application service.",
+          "example" : "High"
+        },
+        "workAlertProperties" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/workAlertProperty"
+          }
+        }
+      }
+    },
+    "workAlertProperty" : {
+      "type" : "object",
+      "description" : "The work alert shall be defined as property on a work alert property.",
+      "required" : [ "id", "workAlertDefinitionId", "value", "valueUnitOfMeasure" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "A unique identification of a work alert property.",
+          "example" : "WA-TRAVEL-SPEED-HIGH"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Additional information about the work alert property.",
+          "example" : "High travel speed"
+        },
+        "workAlertDefinitionId" : {
+          "type" : "string",
+          "description" : "Identifies the work alert definition that defines this work alert. This work alert objects support the work alert definition property(s) associated with the work alert definition. The work alert can act as a container for other objects where it does not have work alert definition association.",
+          "example" : "HG1"
+        },
+        "workAlertPropertyChildIds" : {
+          "type" : "array",
+          "description" : "Unique identifications of children of the work alert property as work alert property IDs which make up part",
+          "example" : "WA-TRAVEL-SPEED-HIGH_Conveyor 12",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "value" : {
+          "type" : "number",
+          "description" : "The default value, set of values, or range of the work alert property.",
+          "example" : 60
+        },
+        "valueUnitOfMeasure" : {
+          "type" : "string",
+          "description" : "The unit of measure of the associated work alert property value, if applicable.",
+          "example" : "Kilometres/Hour"
         }
       }
     }
