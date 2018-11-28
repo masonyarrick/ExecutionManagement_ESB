@@ -1889,6 +1889,11 @@
           "description" : "Additional information about the work alert.",
           "example" : "Dig Rate"
         },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
+        },
         "workAlertDefinitionId" : {
           "type" : "string",
           "description" : "Identifies the work alert definition defining this work alert.",
@@ -1903,11 +1908,6 @@
           "type" : "string",
           "description" : "Timestamp the work alert was generated.",
           "example" : null
-        },
-        "hierarchyScopeId" : {
-          "type" : "string",
-          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
-          "example" : "Eastern Ridge (site)"
         },
         "priority" : {
           "type" : "string",
