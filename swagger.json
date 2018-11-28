@@ -1879,6 +1879,11 @@
           "description" : "An identification of the specific work alert.",
           "example" : "DigRate"
         },
+        "version" : {
+          "type" : "string",
+          "description" : "Custom non-ISA-95 attribute. Current version of work record entry template.",
+          "example" : "1.0"
+        },
         "description" : {
           "type" : "string",
           "description" : "Additional information about the work alert.",
@@ -1931,6 +1936,11 @@
           "type" : "string",
           "description" : "Additional information about the work alert property.",
           "example" : "High travel speed"
+        },
+        "hierarchyScopeId" : {
+          "type" : "string",
+          "description" : "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the object, such as the site or area.",
+          "example" : "Eastern Ridge (site)"
         },
         "workAlertDefinitionId" : {
           "type" : "string",
